@@ -1,14 +1,14 @@
 syntax = "proto3";
 package pb;
 option go_package = "/pb";
-// import "google/api/annotations.proto";
+import "api/annotations.proto";
 
 service Gateway {
   rpc Echo(Message) returns (Message) {
-    // option (google.api.http) = {
-    //   post: "/example"
-    //   body: "*"
-    // };
+    option (google.api.http) = {
+      post: "/example"
+      body: "*"
+    };
   }
 }
 
