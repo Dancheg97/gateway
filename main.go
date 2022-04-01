@@ -10,7 +10,7 @@ import (
 	"google.golang.org/grpc"
 )
 
-//protoc --go_out=. --go-grpc_out=. --grpc-gateway_out=. --grpc-gateway_opt generate_unbound_methods=true api.proto
+//protoc --go_out=. --go-grpc_out=. --grpc-gateway_out=. --grpc-gateway_opt generate_unbound_methods=true --openapiv2_out . api.proto
 
 type server struct {
 	pb.UnimplementedGatewayServer
@@ -31,4 +31,5 @@ func main() {
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)
 	}
+	
 }

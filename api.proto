@@ -1,7 +1,7 @@
 syntax = "proto3";
 package pb;
 option go_package = "/pb";
-import "api/annotations.proto";
+import "google/api/annotations.proto";
 
 service Gateway {
   rpc Echo(Message) returns (Message) {

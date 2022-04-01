@@ -78,7 +78,7 @@ func RegisterGatewayHandlerServer(ctx context.Context, mux *runtime.ServeMux, se
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
-		ctx, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Gateway/Echo", runtime.WithHTTPPathPattern("/pb.Gateway/Echo"))
+		ctx, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Gateway/Echo", runtime.WithHTTPPathPattern("/example"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -141,7 +141,7 @@ func RegisterGatewayHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
-		ctx, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Gateway/Echo", runtime.WithHTTPPathPattern("/pb.Gateway/Echo"))
+		ctx, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Gateway/Echo", runtime.WithHTTPPathPattern("/example"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -161,7 +161,7 @@ func RegisterGatewayHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 }
 
 var (
-	pattern_Gateway_Echo_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"pb.Gateway", "Echo"}, ""))
+	pattern_Gateway_Echo_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0}, []string{"example"}, ""))
 )
 
 var (
