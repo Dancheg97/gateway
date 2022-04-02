@@ -6,29 +6,29 @@ import "google/api/annotations.proto";
 service Gateway {
   rpc PostExample(Message) returns (Message) {
     option (google.api.http) = {
-      post: "/gateway/post"
+      post: "/post"
       body: "*"
     };
   }
   rpc GetExample(Message) returns (Message) {
     option (google.api.http) = {
-      get: "/gateway/get/{id}"
+      get: "/get/{id}"
     };
   }
   rpc DeleteExample(Message) returns (Message) {
     option (google.api.http) = {
-      delete: "/gateway/delete/{id}"
+      delete: "/delete/{id}"
     };
   }
   rpc PutExample(Message) returns (Message) {
     option (google.api.http) = {
-      put: "/gateway/put"
+      put: "/put"
       body: "*"
     };
   }
   rpc PatchExample(Message) returns (Message) {
     option (google.api.http) = {
-      patch: "/gateway/patch"
+      patch: "/patch"
       body: "*"
     };
   }
