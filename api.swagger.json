@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/delete/{id}": {
+    "/gateway/delete/{id}": {
       "delete": {
         "operationId": "Gateway_DeleteExample",
         "responses": {
@@ -47,7 +47,7 @@
         ]
       }
     },
-    "/get/{id}": {
+    "/gateway/get/{id}": {
       "get": {
         "operationId": "Gateway_GetExample",
         "responses": {
@@ -78,7 +78,7 @@
         ]
       }
     },
-    "/patch": {
+    "/gateway/patch": {
       "patch": {
         "operationId": "Gateway_PatchExample",
         "responses": {
@@ -110,7 +110,7 @@
         ]
       }
     },
-    "/post": {
+    "/gateway/post": {
       "post": {
         "operationId": "Gateway_PostExample",
         "responses": {
@@ -142,7 +142,7 @@
         ]
       }
     },
-    "/put": {
+    "/gateway/put": {
       "put": {
         "operationId": "Gateway_PutExample",
         "responses": {
