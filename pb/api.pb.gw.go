@@ -216,7 +216,7 @@ func RegisterGatewayHandlerServer(ctx context.Context, mux *runtime.ServeMux, se
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
-		ctx, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Gateway/PostExample", runtime.WithHTTPPathPattern("/example"))
+		ctx, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Gateway/PostExample", runtime.WithHTTPPathPattern("/post"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -240,7 +240,7 @@ func RegisterGatewayHandlerServer(ctx context.Context, mux *runtime.ServeMux, se
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
-		ctx, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Gateway/GetExample", runtime.WithHTTPPathPattern("/example/{id}"))
+		ctx, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Gateway/GetExample", runtime.WithHTTPPathPattern("/get/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -264,7 +264,7 @@ func RegisterGatewayHandlerServer(ctx context.Context, mux *runtime.ServeMux, se
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
-		ctx, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Gateway/DeleteExample", runtime.WithHTTPPathPattern("/example/{id}"))
+		ctx, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Gateway/DeleteExample", runtime.WithHTTPPathPattern("/delete/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -288,7 +288,7 @@ func RegisterGatewayHandlerServer(ctx context.Context, mux *runtime.ServeMux, se
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
-		ctx, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Gateway/PutExample", runtime.WithHTTPPathPattern("/example"))
+		ctx, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Gateway/PutExample", runtime.WithHTTPPathPattern("/put"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -351,7 +351,7 @@ func RegisterGatewayHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
-		ctx, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Gateway/PostExample", runtime.WithHTTPPathPattern("/example"))
+		ctx, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Gateway/PostExample", runtime.WithHTTPPathPattern("/post"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -372,7 +372,7 @@ func RegisterGatewayHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
-		ctx, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Gateway/GetExample", runtime.WithHTTPPathPattern("/example/{id}"))
+		ctx, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Gateway/GetExample", runtime.WithHTTPPathPattern("/get/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -393,7 +393,7 @@ func RegisterGatewayHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
-		ctx, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Gateway/DeleteExample", runtime.WithHTTPPathPattern("/example/{id}"))
+		ctx, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Gateway/DeleteExample", runtime.WithHTTPPathPattern("/delete/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -414,7 +414,7 @@ func RegisterGatewayHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
-		ctx, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Gateway/PutExample", runtime.WithHTTPPathPattern("/example"))
+		ctx, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Gateway/PutExample", runtime.WithHTTPPathPattern("/put"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -434,13 +434,13 @@ func RegisterGatewayHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 }
 
 var (
-	pattern_Gateway_PostExample_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0}, []string{"example"}, ""))
+	pattern_Gateway_PostExample_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0}, []string{"post"}, ""))
 
-	pattern_Gateway_GetExample_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1}, []string{"example", "id"}, ""))
+	pattern_Gateway_GetExample_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1}, []string{"get", "id"}, ""))
 
-	pattern_Gateway_DeleteExample_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1}, []string{"example", "id"}, ""))
+	pattern_Gateway_DeleteExample_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1}, []string{"delete", "id"}, ""))
 
-	pattern_Gateway_PutExample_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0}, []string{"example"}, ""))
+	pattern_Gateway_PutExample_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0}, []string{"put"}, ""))
 )
 
 var (
