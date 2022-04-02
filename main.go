@@ -40,6 +40,11 @@ func (s *server) PutExample(ctx context.Context, in *pb.Message) (*pb.Message, e
 	return &pb.Message{Id: in.Id}, nil
 }
 
+func (s *server) PatchExample(ctx context.Context, in *pb.Message) (*pb.Message, error) {
+	fmt.Println(in)
+	return &pb.Message{Id: in.Id}, nil
+}
+
 func runRest() {
 	ctx := context.Background()
 	ctx, cancel := context.WithCancel(ctx)
@@ -51,10 +56,12 @@ func runRest() {
 		panic(err)
 	}
 	log.Printf("server listening at 8081")
-	http.ListenAndServe(":8081", mux)
+	if err := http.ListenAndServe(":8081", mux); err != nil {
+		panic(err)
+	}
 }
 
-func main() {
+func runGrpc() {
 	lis, err := net.Listen("tcp", ":12201")
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
@@ -62,6 +69,12 @@ func main() {
 	s := grpc.NewServer()
 	pb.RegisterGatewayServer(s, &server{})
 	log.Printf("server listening at %v", lis.Addr())
-	go s.Serve(lis)
+	if err := s.Serve(lis); err != nil {
+		panic(err)
+	}
+}
+
+func main() {
+	go runGrpc()
 	runRest()
 }

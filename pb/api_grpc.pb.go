@@ -26,6 +26,7 @@ type GatewayClient interface {
 	GetExample(ctx context.Context, in *Message, opts ...grpc.CallOption) (*Message, error)
 	DeleteExample(ctx context.Context, in *Message, opts ...grpc.CallOption) (*Message, error)
 	PutExample(ctx context.Context, in *Message, opts ...grpc.CallOption) (*Message, error)
+	PatchExample(ctx context.Context, in *Message, opts ...grpc.CallOption) (*Message, error)
 }
 
 type gatewayClient struct {
@@ -72,6 +73,15 @@ func (c *gatewayClient) PutExample(ctx context.Context, in *Message, opts ...grp
 	return out, nil
 }
 
+func (c *gatewayClient) PatchExample(ctx context.Context, in *Message, opts ...grpc.CallOption) (*Message, error) {
+	out := new(Message)
+	err := c.cc.Invoke(ctx, "/pb.Gateway/PatchExample", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // GatewayServer is the server API for Gateway service.
 // All implementations must embed UnimplementedGatewayServer
 // for forward compatibility
@@ -80,6 +90,7 @@ type GatewayServer interface {
 	GetExample(context.Context, *Message) (*Message, error)
 	DeleteExample(context.Context, *Message) (*Message, error)
 	PutExample(context.Context, *Message) (*Message, error)
+	PatchExample(context.Context, *Message) (*Message, error)
 	mustEmbedUnimplementedGatewayServer()
 }
 
@@ -98,6 +109,9 @@ func (UnimplementedGatewayServer) DeleteExample(context.Context, *Message) (*Mes
 }
 func (UnimplementedGatewayServer) PutExample(context.Context, *Message) (*Message, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PutExample not implemented")
+}
+func (UnimplementedGatewayServer) PatchExample(context.Context, *Message) (*Message, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PatchExample not implemented")
 }
 func (UnimplementedGatewayServer) mustEmbedUnimplementedGatewayServer() {}
 
@@ -184,6 +198,24 @@ func _Gateway_PutExample_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Gateway_PatchExample_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Message)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GatewayServer).PatchExample(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.Gateway/PatchExample",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GatewayServer).PatchExample(ctx, req.(*Message))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Gateway_ServiceDesc is the grpc.ServiceDesc for Gateway service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -206,6 +238,10 @@ var Gateway_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "PutExample",
 			Handler:    _Gateway_PutExample_Handler,
+		},
+		{
+			MethodName: "PatchExample",
+			Handler:    _Gateway_PatchExample_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
