@@ -75,6 +75,6 @@ func runGrpc() {
 }
 
 func main() {
-	go runGrpc()
-	runRest()
+	go runRest()
+	runGrpc()
 }
