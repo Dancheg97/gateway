@@ -4,14 +4,30 @@ option go_package = "/pb";
 import "google/api/annotations.proto";
 
 service Gateway {
-  rpc Echo(Message) returns (Message) {
+  rpc PostExample(Message) returns (Message) {
     option (google.api.http) = {
       post: "/example"
+      body: "*"
+    };
+  }
+  rpc GetExample(Message) returns (Message) {
+    option (google.api.http) = {
+      get: "/example/{id}"
+    };
+  }
+  rpc DeleteExample(Message) returns (Message) {
+    option (google.api.http) = {
+      delete: "/example/{id}"
+    };
+  }
+  rpc PutExample(Message) returns (Message) {
+    option (google.api.http) = {
+      put: "/example"
       body: "*"
     };
   }
 }
 
 message Message {
-    string message = 1;
+  uint64 id = 1;
 }
